@@ -8,6 +8,22 @@
 </head>
 <body>
 
+<nav>
+  <ul>
+    <li><a href="<%= root_path %>">Home</a></li>
+    <% unless @current_user.present? %>
+    <li><a href="<%= signup_path %>">Sign Up</a></li>
+    <li><a href="<%= login_path %>">Log In</a></li>
+    <% else %>
+    <li><a href="<%= logout_path %>">Log Out</a></li>
+    <% end %>
+  </ul>
+</nav>
+
+<% if flash[:notice].present? %>
+  <h2><%= flash[:notice] %></h2>
+<% end %>
+
 <%= yield %>
 
 </body>
