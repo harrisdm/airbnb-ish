@@ -19,10 +19,12 @@ Rails.application.routes.draw do
   post '/users' => 'users#create'
   get 'users/edit' => 'users#edit'
   patch '/users' => 'users#update'
+  get '/user' => 'users#show'
  
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   get '/logout' => 'sessions#destroy'
 
+  resources :properties
   
 end

@@ -15,6 +15,7 @@
     <li><a href="<%= signup_path %>">Sign Up</a></li>
     <li><a href="<%= login_path %>">Log In</a></li>
     <% else %>
+    <li><a href="<%= user_path %>">View Profile</a></li>
     <li><a href="<%= logout_path %>">Log Out</a></li>
     <% end %>
   </ul>

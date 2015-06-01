@@ -1,0 +1,17 @@
+
+<h1>Hi, <%= @user.first_name %>!</h1>
+
+
+<%= image_tag(@user.image) %>
+<p>First Name: <%= @user.first_name %></p>
+<p>Last Name: <%= @user.last_name %></p>
+<p>Email: <%= @user.email %></p>
+
+<p><%= link_to("Edit Profile", users_edit_path) %></p>
+<p><%= link_to("Add Property", new_property_path) %></p>
+
+
+<h2>My Properties:</h2>
+<% @user.properties.each do |property| %>
+  <%= link_to(property.title, property_path(property.id)) %>
+<% end %>

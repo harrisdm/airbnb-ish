@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :check_logged_in, :only => [:edit]
+  before_action :check_logged_in, :only => [:edit, :show]
   
   def new
     @user = User.new
@@ -24,6 +24,10 @@ class UsersController < ApplicationController
     user = @current_user
     user.update user_params
     redirect_to root_path
+  end
+
+  def show
+    @user = @current_user
   end
 
 
