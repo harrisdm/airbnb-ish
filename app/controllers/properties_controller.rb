@@ -5,19 +5,15 @@ class PropertiesController < ApplicationController
     else
       @properties = Property.all
     end
-    @hash = Gmaps4rails.build_markers(@properties) do |property, marker|
-      marker.lat property.latitude
-      marker.lng property.longitude
-      marker.infowindow "$#{property.rent}"
-      marker.picture({
-       "url" => "http://www.clker.com/cliparts/B/B/1/E/y/r/marker-pin-google.svg",
-       "width" =>  32,
-       "height" => 32})
+    # @hash = Gmaps4rails.build_markers(@properties) do |property, marker|
+    #   marker.lat property.latitude
+    #   marker.lng property.longitude
+    #   marker.infowindow "$#{property.rent}"
 
-
-      marker.json({ title: property.rent })
-    end
+    #   marker.json({ title: "$#{property.rent.round()}", html: link_to(property.title, property) })
+    # end
     #raise params.inspect
+    # MOVED TO THE VIEW FOR HELPER ACTION
   end
 
   def new
