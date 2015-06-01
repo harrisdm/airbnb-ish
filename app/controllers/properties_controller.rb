@@ -1,6 +1,10 @@
 class PropertiesController < ApplicationController
   def index
-    @properties = Property.all
+    if params[:search].present?
+      @properties = Property.near(params[:search], 50, :order => :rent)
+    else
+      @properties = Property.all
+    end
   end
 
   def new

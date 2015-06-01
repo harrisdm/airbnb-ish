@@ -2,6 +2,18 @@
 <p>Find me in app/views/properties/index.html.erb</p>
 
 
+
+<%= form_tag properties_path, :method => :get do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+
+
+
+<% unless @properties.nil? %>
 <ul>
 <% @properties.each do |property| %>
 
@@ -9,3 +21,4 @@
 
 <% end %>
 </ul>
+<% end %>
