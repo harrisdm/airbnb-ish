@@ -4,11 +4,10 @@
 
 <h2><%= @property.title %></h2>
 <p>Type: <%= @property.property_type.name %></p>
-<p><%= @property.street_address %></p>
-<p><%= @property.city %></p>
-<p><%= @property.state %></p>
-<p><%= @property.country %></p>
-<p><%= @property.description %></p>
+<p>Address: <%= @property.address %></p>
+<p>Lat: <%= @property.latitude %></p>
+<p>Long: <%= @property.longitude %></p>
+<p>Description: <%= @property.description %></p>
 <p>Rent: <%= number_to_currency(@property.rent) %></p>
 <p>Beds: <%= @property.beds %></p>
 <p>Baths: <%= @property.baths %></p>

@@ -10,7 +10,7 @@ class PropertiesController < ApplicationController
   def create
     property = Property.create(property_params)
     if property.save
-      redirect_to property_path
+      redirect_to property_path(property.id)
     else
       render :new
     end
@@ -37,6 +37,6 @@ class PropertiesController < ApplicationController
 
   private
   def property_params
-    params.require(:property).permit(:title, :image, :street_address, :city, :state, :country, :property_type_id, :description, :rent, :beds, :baths, :max_people, :min_stay, :check_in_time, :check_out_time, :pets, :user_id, :active)
+    params.require(:property).permit(:title, :image, :address, :property_type_id, :description, :rent, :beds, :baths, :max_people, :min_stay, :check_in_time, :check_out_time, :pets, :user_id, :active)
   end
 end

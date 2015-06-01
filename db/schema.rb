@@ -35,10 +35,9 @@ ActiveRecord::Schema.define(version: 20150531125758) do
   create_table "properties", force: :cascade do |t|
     t.string   "title"
     t.string   "image"
-    t.string   "street_address"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
+    t.text     "address"
+    t.float    "latitude"
+    t.float    "longitude"
     t.text     "description"
     t.integer  "property_type_id"
     t.float    "rent"

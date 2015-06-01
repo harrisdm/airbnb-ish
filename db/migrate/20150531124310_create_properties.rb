@@ -3,10 +3,9 @@ class CreateProperties < ActiveRecord::Migration
     create_table :properties do |t|
       t.string  :title
       t.string  :image
-      t.string  :street_address
-      t.string  :city
-      t.string  :state
-      t.string  :country
+      t.text    :address
+      t.float   :latitude
+      t.float   :longitude
       t.text    :description
       t.integer :property_type_id
       t.float   :rent

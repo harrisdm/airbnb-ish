@@ -5,10 +5,9 @@
 #  id               :integer          not null, primary key
 #  title            :string
 #  image            :string
-#  street_address   :string
-#  city             :string
-#  state            :string
-#  country          :string
+#  address          :text
+#  latitude         :float
+#  longitude        :float
 #  description      :text
 #  property_type_id :integer
 #  rent             :float
@@ -29,5 +28,8 @@ class Property < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :property_type
+
+  geocoded_by :address
+  after_validation :geocode, :if => :address_changed?
 
 end

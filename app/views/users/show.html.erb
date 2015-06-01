@@ -13,5 +13,5 @@
 
 <h2>My Properties:</h2>
 <% @user.properties.each do |property| %>
-  <%= link_to(property.title, property_path(property.id)) %>
+  <p><%= link_to(property.title, property_path(property.id)) %></p>
 <% end %>
