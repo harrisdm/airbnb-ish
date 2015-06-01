@@ -31,6 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 gem 'geocoder'
+gem 'gmaps4rails'
 
 gem 'remove_turbolinks'
     

@@ -5,6 +5,19 @@ class PropertiesController < ApplicationController
     else
       @properties = Property.all
     end
+    @hash = Gmaps4rails.build_markers(@properties) do |property, marker|
+      marker.lat property.latitude
+      marker.lng property.longitude
+      marker.infowindow "$#{property.rent}"
+      marker.picture({
+       "url" => "http://www.clker.com/cliparts/B/B/1/E/y/r/marker-pin-google.svg",
+       "width" =>  32,
+       "height" => 32})
+
+
+      marker.json({ title: property.rent })
+    end
+    #raise params.inspect
   end
 
   def new
@@ -43,4 +56,5 @@ class PropertiesController < ApplicationController
   def property_params
     params.require(:property).permit(:title, :image, :address, :property_type_id, :description, :rent, :beds, :baths, :max_people, :min_stay, :check_in_time, :check_out_time, :pets, :user_id, :active)
   end
+
 end
