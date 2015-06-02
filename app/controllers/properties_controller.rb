@@ -1,9 +1,9 @@
 class PropertiesController < ApplicationController
   def index
     if params[:search].present?
-      @properties = Property.near(params[:search], 50, :order => :rent)
+      @properties = Property.near(params[:search], 50, :order => :rent).paginate(:per_page => 4, :page => params[:page])
     else
-      @properties = Property.all
+      @properties = Property.all.paginate(:per_page => 4, :page => params[:page])
     end
     # @hash = Gmaps4rails.build_markers(@properties) do |property, marker|
     #   marker.lat property.latitude

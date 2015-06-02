@@ -32,6 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'will_paginate'
 
 gem 'remove_turbolinks'
     

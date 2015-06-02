@@ -46,6 +46,6 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     markers = handler.addMarkers(markers)
     handler.bounds.extendWith(markers)
     handler.fitMapToBounds()
-    handler.getMap().setZoom(15);
+    #handler.getMap().setZoom(15);
 
 
