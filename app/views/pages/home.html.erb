@@ -1,2 +1,16 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
+
+
+<div class="container">
+  <%= form_tag properties_path, :method => :get, :class => "form-horizontal" do %>
+    <div class="form-group">
+      <div class="col-md-10">
+      <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Location" %>
+      </div>
+      <div class="col-md-2">
+      <%= submit_tag "Search", :name => nil, :class => "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>

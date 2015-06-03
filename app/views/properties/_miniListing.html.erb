@@ -1,0 +1,24 @@
+
+
+<a href="<%= property_path(@property.id) %>">
+  <div class="listing-container">
+    <div class="listing-pic-container">
+    <div class="listing-pic">
+      <% @property.image = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg" if @property.image.nil? %>
+      <%= image_tag(@property.image) %>
+    </div>
+    </div>
+    <div class="listing-price">
+      <%# link_to(number_to_currency(@property.rent), @property) %>
+      <%= link_to("$#{@property.rent.to_i}", @property) %>
+    </div>
+    <div class="listing-profile">
+      <% @property.user.image = "http://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif" if @property.user.image.nil? %>
+      <%= image_tag(@property.user.image) %>
+    </div>
+    <div class="listing-title">
+      <%= link_to(@property.title, @property) %>
+    </div>
+  </div>
+</a>
+

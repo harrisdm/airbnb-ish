@@ -11,7 +11,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
 
   rich_marker_options: ->
     marker = document.createElement("div")
-    marker.setAttribute 'class', 'marker_container yellow'
+    marker.setAttribute 'class', 'marker_container'
     marker.innerHTML = @args.title
     { content: marker }
 
@@ -22,7 +22,7 @@ class RichMarkerBuilder extends Gmaps.Google.Builders.Marker #inherit from built
     return null unless _.isString @args.infowindow
 
     boxText = document.createElement("div")
-    boxText.setAttribute('class', 'marker_container yellow') #to customize
+    boxText.setAttribute('class', 'viewbox-container') #to customize
     #boxText.innerHTML = @args.infowindow
     boxText.innerHTML = @args.html
     @infowindow = new InfoBox(@infobox(boxText))

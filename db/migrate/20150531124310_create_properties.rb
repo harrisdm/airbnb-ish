@@ -2,7 +2,7 @@ class CreateProperties < ActiveRecord::Migration
   def change
     create_table :properties do |t|
       t.string  :title
-      t.string  :image
+      t.string  :image            :default => "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg"
       t.text    :address
       t.float   :latitude
       t.float   :longitude

@@ -1,0 +1,126 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 52px;
+  width:inherit;
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.listing-container {
+  position: relative;
+  margin-top: 25px;
+}
+
+.listing-pic-container {
+  overflow: hidden;
+  padding-bottom: 67%;
+}
+
+.listing-pic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.listing-pic img {
+  --max-width: 100%;
+  width: auto;
+  height: 100%;
+}
+
+.listing-title {
+  font-size: 1.3em;
+}
+
+.listing-price {
+  max-width: 50%;
+  padding: 10px;
+  background-color: rgba(100,100,100,0.7);
+  font-size: 1.3em;
+  position: absolute;
+  left: 0;
+  bottom: 30%;
+}
+.listing-price a { 
+  color: rgba(255,255,255,1);
+  text-decoration: none;
+}
+
+.listing-profile img {
+  border-radius: 50%;
+  max-width: 30%;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  z-index: 1;
+  border: 2px solid rgba(255,255,255,1);
+}
+
+.listing-title {
+  position: relative;
+  background-color: rgba(255,255,255,1);
+  padding: 5px;
+
+}
+
+.map-container {
+  position:fixed;
+  width: inherit;
+  right: 0;
+  top: 52px;
+}
+
+#map {
+  --width: inherit;
+  min-height: 90vh;
+}
+
+
+.viewbox-container {
+  background-color: rgba(255,255,255,1);
+  padding: 8px;
+  margin-right: 14px;
+  border: 1px solid rgba(200,200,200,1);
+}
+.viewbox-container .listing-container {
+  margin-top: 0px;
+}
+
+.marker_container { 
+  border: 1px solid black; 
+  margin-top: 0px; 
+  background: linen; 
+  padding: 8px;
+  font-size: 1.2em;
+  font-weight: strong;
+}
+
+
+
+
+
+
