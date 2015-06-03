@@ -29,10 +29,12 @@ body {
   position: fixed;
   left: 0;
   top: 82px;
-  width:inherit;
   height: 90vh;
   overflow-y: scroll;
+  padding-bottom: 60px;
 }
+
+.search-bar { padding: 20px; }
 
 .listing-container {
   position: relative;
@@ -63,10 +65,12 @@ body {
 }
 
 .listing-price {
-  max-width: 50%;
-  padding: 10px;
   background-color: rgba(100,100,100,0.7);
+  width: 33%;
+  border-radius: 0 15px 15px 0;
+  text-align: center;
   font-size: 1.3em;
+  padding: 10px;
   position: absolute;
   left: 0;
   bottom: 30%;
