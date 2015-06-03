@@ -1,7 +1,7 @@
 class PropertiesController < ApplicationController
   def index
     if params[:search].present?
-      @properties = Property.near(params[:search], 50, :order => :rent).paginate(:per_page => 6, :page => params[:page])
+      @properties = Property.near(params[:search], 50, :order => :rent).paginate(:per_page => 4, :page => params[:page])
     else
       @properties = Property.all.paginate(:per_page => 4, :page => params[:page])
     end
