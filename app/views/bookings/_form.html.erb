@@ -1,0 +1,12 @@
+<%= form_for @booking do |f| %>
+
+<div class="form-group"><%= f.label :check_in %><%= f.date_field :check_in, :class => "form-control" %></div>
+<div class="form-group"><%= f.label :check_out %><%= f.date_field :check_out, :class => "form-control"  %></div> 
+<div class="form-group"><%= f.label :property_id %><%= f.text_field :property_id, :class => "form-control"  %></div> 
+<div class="form-group"><%= f.label :user_id %><%= f.text_field :user_id, :value => @current_user.id, :class => "form-control" %></p>
+<div class="form-group"><%= f.label :booking_status_id %><%= f.text_field :booking_status_id, :value => 1, :class => "form-control" %></div>
+
+<p><%= f.submit %></p>
+<% end %>
+
+

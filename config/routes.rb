@@ -26,5 +26,7 @@ Rails.application.routes.draw do
   get '/logout' => 'sessions#destroy'
 
   resources :properties
-  
+    
+  resources :bookings
+
 end

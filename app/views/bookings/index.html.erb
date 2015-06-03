@@ -1,0 +1,27 @@
+<h1>Bookings#index</h1>
+<p>Find me in app/views/bookings/index.html.erb</p>
+
+
+<% @booking_breakdown.each do |status, bookings| %>
+  <% unless bookings.empty? %>
+  <h2><%= status %></h2>
+  <table class="table">
+    <tr>
+      <th>Property</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+      <th></th>
+    </tr>
+  <% bookings.each do |booking| %>
+    <tr>
+      <td><%= link_to(booking.property.title, booking.property )%></td>
+      <td><%= booking.check_in %></td>
+      <td><%= booking.check_out %></td>
+      <td><%= link_to("View Booking", booking) %></td>
+    </tr>
+  <% end %>
+  </table>
+  <% end %>
+<% end %>
+
+

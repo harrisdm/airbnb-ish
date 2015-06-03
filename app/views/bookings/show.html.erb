@@ -1,0 +1,27 @@
+<h1>Bookings#show</h1>
+<p>Find me in app/views/bookings/show.html.erb</p>
+
+
+
+<% @booking.property.image = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg" if @booking.property.image.nil? %>
+<%= image_tag(@booking.property.image) %>
+<h2><%= @booking.property.title %></h2>
+<p>Check In: <%= @booking.check_in %> <%= @booking.property.check_in_time %></p>
+<p>Check Out: <%= @booking.check_out %> <%= @booking.property.check_out_time %></p>
+
+<p>Price per night: <%= number_to_currency(@booking.property.rent) %></p>
+
+<% nights = (@booking.check_out - @booking.check_in).to_i %>
+<p>Num. Nights: <%= nights %></p>
+<p>Cost: <%= number_to_currency(nights * @booking.property.rent) %></p>
+<p>Status: <%= @booking.booking_status.name %></p>
+
+
+<p><%= @booking.property.user.first_name %> <% @booking.property.user.last_name %></p>
+<p><%= @booking.property.user.image %></p>
+<% @booking.property.user.image = "http://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif" if @booking.property.user.image.nil? %>
+<%= image_tag(@booking.property.user.image) %>
+
+
+
+
