@@ -24,7 +24,7 @@
           <li><a href="<%= signup_path %>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
           <li><a href="<%= login_path %>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         <% else %>
-          <li><a href="<%= users_edit_path %>"><span class="glyphicon glyphicon-user"></span> <%= @current_user.first_name %></a></li>
+          <li><a href="<%= user_path %>"><span class="glyphicon glyphicon-user"></span> <%= @current_user.first_name %></a></li>
           <li><a href="<%= logout_path %>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
         <% end %>
       </ul>

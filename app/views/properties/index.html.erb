@@ -31,9 +31,8 @@
     <% unless @properties.nil? %>
 
       <% @properties.each do |property| %>
-        <% @property = property %>
         <div class="col-xs-12 col-sm-4 col-md-6">
-        <%= render :partial => "miniListing" %>
+          <%== property_listing(property) %>
         </div>
       <% end %>
 
@@ -68,6 +67,6 @@ end
 %>
 
 <script type="text/javascript">
-buildMap(<%=raw @hash.to_json %>);
+  buildMap(<%=raw @hash.to_json %>);
 </script>
 

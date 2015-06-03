@@ -1,8 +1,6 @@
 
 <div class="property-banner row">
-  <% @property.image = "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg" if @property.image.nil? %>
-  <%# image_tag(@property.image) %>
-  <div class="cover-img" style="background-image: url(<%= @property.image %>)"></div>
+  <div class="cover-img" style="background-image: url(<%= property_image_link(@property) %>)"></div>
 </div>
 
 
@@ -15,8 +13,7 @@
         <!-- OWNER PROFILE -->
 
         <div class="col-md-3 user-profile ">
-          <% @property.user.image = "http://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif" if @property.user.image.nil? %>
-          <%= image_tag(@property.user.image) %>
+          <%= image_tag(profile_image_link(@property.user)) %>
           <h4><%= @property.user.first_name %></h4>
         </div>
 
@@ -182,9 +179,8 @@
   <h4>Nearby Properties</h4>
   <div class="row">
     <% for property in @property.nearbys(10).limit(4) %>
-      <% @property = property %>
       <div class="col-sm-3">
-      <%= render :partial => "miniListing" %>
+        <%== property_listing(property) %>
       </div>
     <% end %>
   </div>
