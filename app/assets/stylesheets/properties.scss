@@ -38,6 +38,11 @@ a, a:hover { text-decoration: none; }
   font-weight: bold;
 }
 
+.button-container {
+  padding: 10px;
+  text-align: right;
+}
+
 /***********************************************
   Search Listings
 ***********************************************/
@@ -196,11 +201,6 @@ a, a:hover { text-decoration: none; }
 .property-info {
   padding: 20px;
   border-bottom: 1px solid rgba(200,200,200,1);
-}
-
-.property-buttons {
-  padding: 10px;
-  text-align: right;
 }
 
 #property-map { margin-top: 15px; }

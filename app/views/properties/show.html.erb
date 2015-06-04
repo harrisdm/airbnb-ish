@@ -150,7 +150,7 @@
 
       <% if @current_user.id == @property.user_id %>
       <div class="row">
-        <div class="property-buttons">
+        <div class="button-container">
           <%= link_to("Edit Property", edit_property_path, :class => "btn btn-warning") %>
           <%= link_to("Remove Listing", property_path, :class => "btn btn-danger", :method => "delete") %>
         </div>
