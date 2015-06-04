@@ -17,7 +17,7 @@ class CreateProperties < ActiveRecord::Migration
       t.time    :check_out_time
       t.boolean :pets
       t.integer :user_id
-      t.boolean :active           :default => true 
+      t.boolean :active
 
       t.timestamps null: false
     end
