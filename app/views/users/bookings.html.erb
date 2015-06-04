@@ -1,0 +1,90 @@
+
+
+
+<div class="container">
+  
+  <div class="row">
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+    
+    <div class="col-xs-8">
+
+      <!-- MENU LINKS -->
+      <%== user_menu %>
+
+        <!-- PAGE CONTENTS -->
+
+        <div class="row">
+          <div class="col-xs-12"><h4>Your Trips:</h4></div>
+        </div>
+        
+          <% if @breakdown.all? {|k,v| v.empty?} %>
+            <div class="row col-xs-12 panel text-center">
+              You have no trips planned
+            </div>
+          <% else %>
+            <% @breakdown.each do |status, bookings| %>
+              <% unless bookings.empty? %>
+                <div class="row" >
+
+                <% 
+                  case bookings.first.booking_status_id
+                    when 1
+                      colour = "bg-warning"
+                   when 2
+                      colour = "bg-success"
+                   else
+                      colour = "bg-danger"
+                   end 
+                %>
+
+                  <div class="col-xs-12 panel panel-spacer">
+                    <div class="<%= colour %> status_banner">
+                      <h4><%= status %></h4>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tr>
+                          <th>Property</th>
+                          <th class="text-center">Host</th>
+                          <th class="text-center">Check In</th>
+                          <th class="text-center">Check Out</th>
+                          <th class="text-center">Options</th>
+                        </tr>
+                      <% bookings.each do |booking| %>
+                        <tr>
+                          <td><%= link_to(booking.property.title, booking.property )%></td>
+                          <td class="text-center"><%= link_to(booking.property.user.name, show_user_path(booking.property.user.id)) %></td>
+                          <td class="text-center"><%= date_format booking.check_in %></td>
+                          <td class="text-center"><%= date_format booking.check_out %></td>
+                          <td class="text-center">
+                            <div><%= link_to("View", booking) %></div>
+                            <% if booking.booking_status_id == 1 || booking.booking_status_id == 2 %>
+                              <div><%= link_to("Cancel", cancel_booking_path(booking.id), :method => :patch) %></div>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        
+
+      </div>
+
+    </div>
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+
+  </div>
+      
+
+</div>  <!-- container -->

@@ -1,37 +1,228 @@
-<h1>Properties#show</h1>
-<p>Find me in app/views/properties/show.html.erb</p>
 
-
-<h2><%= @property.title %></h2>
-<p>Type: <%= @property.property_type.name %></p>
-<p>Address: <%= @property.address %></p>
-<p>Lat: <%= @property.latitude %></p>
-<p>Long: <%= @property.longitude %></p>
-<p>Description: <%= @property.description %></p>
-<p>Rent: <%= number_to_currency(@property.rent) %></p>
-<p>Beds: <%= @property.beds %></p>
-<p>Baths: <%= @property.baths %></p>
-<p>Guests: <%= @property.max_people %></p>
-<p>Min Stay: <%= @property.min_stay %></p>
-<p>Check-in: <%= time_format(@property.check_in_time) %></p>
-<p>Check-out: <%= time_format(@property.check_out_time) %></p>
-<p>Pets:
-  <% if @property.pets %>
-    Yes
-  <% else %>
-    No
-  <% end %>
-</p>
-
-<%= link_to("Edit Property", edit_property_path) %>
-
-<div>
-<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= @property.latitude %>%2C%20%20<%= @property.longitude %>&key=AIzaSyAAiCRdJuc3KbZmfKzLhPkm4DAoG5-7lcA"></iframe>
+<div class="property-banner row">
+  <div class="cover-img" style="background-image: url(<%= property_image_link(@property) %>)"></div>
 </div>
 
-<h2>Nearby Properties</h2>
-<ul>
-<% for property in @property.nearbys(10) %>
-  <li><%= link_to( property.title, property) %> (<%= property.distance.round(2) %>, miles)</li>
-<% end %>
-</ul>
+
+<div class="panel summary row text-center">
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-8 row">
+
+        <!-- OWNER PROFILE -->
+
+        <div class="col-md-3 user-profile ">
+          <%= link_to(image_tag(profile_image_link(@property.user)), show_user_path(@property.user.id)) %>
+          <h4><%= link_to(@property.user.name, show_user_path(@property.user.id)) %></h4>
+        </div>
+
+        <!-- PROPERTY TITLE AND ICONS -->
+
+        <div class="col-md-9 property-icons">
+          <h2><%= @property.title %></h2>
+          <div class="row">
+            <div class="col-xs-3">
+              <span class="glyphicon glyphicon-home"></span>
+              <%= @property.property_type.name %>
+            </div>
+            <div class="col-xs-3">
+            <span class="glyphicon glyphicon-home"></span>
+              <%= @property.max_people %> Guests
+            </div>
+            <div class="col-xs-3">
+            <span class="glyphicon glyphicon-home"></span>
+              <%= @property.beds %> Beds
+            </div>
+            <div class="col-xs-3">
+            <span class="glyphicon glyphicon-home"></span>
+              <%= @property.baths %> Baths
+            </div>
+          </div>
+        </div>
+
+      </div>
+        
+
+      <!-- BOOKING FORM -->
+
+      <div class="col-lg-4">
+        <div class="booking-form-container">
+          <%= form_tag bookings_path, :method => :post do %>
+
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= label_tag :check_in %>
+                <%= date_field_tag :check_in, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="form-group">
+                <%= label_tag :check_out %>
+                <%= date_field_tag :check_out, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="col-xs-12">
+              <div class="form-group">
+                <% 
+                  count = 1
+                  guests = []
+                  until count > @property.max_people do
+                    guests.push([count,count])
+                    count += 1
+                  end
+                %>
+                <%= label_tag :guest_count, "Number of Guests" %>
+                <%= select_tag :guest_count, options_for_select(guests), :class => 'form-control' %>
+              </div>
+            </div>
+          </div>
+          <%# raise params.inspect %>
+          <div class="form-group"><%= hidden_field_tag :property_id, @property.id, :class => "form-control"  %></div>
+
+          <% if @current_user.nil? %>
+            <div class="form-group"><%= hidden_field_tag :user_id, 0, :class => "form-control" %></div>
+          <% else %>
+            <div class="form-group"><%= hidden_field_tag :user_id, @current_user.id, :class => "form-control" %></div>
+          <% end %>
+
+          <div class="form-group"><%= hidden_field_tag :booking_status_id, 1, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :rent, @property.rent, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :cleaning_fee, @property.cleaning_fee, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :service_fee, 50, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :check_in_time, @property.check_in_time, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :check_out_time, @property.check_out_time, :class => "form-control" %></div>
+          <% if @current_user.nil? %>
+            <div class="booking-button-container"><%= link_to("Login", login_path, :class => "form-control btn-success") %></div>
+            <div class="booking-button-container"><%= link_to("Sign Up", signup_path, :class => "form-control btn-success") %></div>
+          <% else %>
+            <div class="booking-button-container"><%= submit_tag "Request Booking", :class => "form-control btn-success" %></div>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+
+    </div>  <!-- row -->
+  
+  </div>  <!-- container -->
+</div>  <!-- panel -->
+
+
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-xs-12"><h4>About This Listing</h4></div>
+      </div>
+
+      <!-- THE SPACE -->
+
+      <div class="row property-info">
+        <div class="col-xs-3">The Space</div>
+        <div class="col-xs-9 row">
+          <div class="col-sm-6">
+            <div>Property type: <span class="bold"><%= @property.property_type.name %></span></div>
+            <div>Accommodates: <span class="bold"><%= @property.max_people %></span></div>
+            <div>Bedrooms: <span class="bold"><%= @property.beds %></span></div>
+            <div>Bathrooms: <span class="bold"><%= @property.baths %></span></div>
+          </div>
+          <div class="col-sm-6">
+            <div>Check-in Time: <span class="bold"><%= time_format(@property.check_in_time) %></span></div>
+            <div>Check-out Time: <span class="bold"><%= time_format(@property.check_out_time) %></span></div>
+            <div>Minimum Stay: <span class="bold"><%= @property.min_stay %></span></div>
+            <div>Pets Allowed: <span class="bold"><% if @property.pets %> Yes <% else %> No <% end %></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AMENITIES -->
+
+      <div class="row property-info">
+        <div class="col-xs-3">Amenities</div>
+        <div class="col-xs-9 row">
+          <div class="col-sm-6"><< COMING SOON >></div>
+          <div class="col-sm-6"></div>
+        </div>
+      </div>
+
+      <!-- PRICES -->
+
+      <div class="row property-info">
+        <div class="col-xs-3">Prices</div>
+        <div class="col-xs-9 row">
+          <div class="col-sm-6">
+            <div>Nightly: <span class="bold"><%= number_to_currency(@property.rent) %></span></div>
+            <div>Weekly: <span class="bold"><%= number_to_currency(@property.rent * 7 * 0.9) %> /week</span></div>
+            <div>Monthly: <span class="bold"><%= number_to_currency(@property.rent * 30 * 0.8) %> /month</span></div>
+          </div>
+          <div class="col-sm-6">
+            <div>Cleaning Fee: <span class="bold"><%= number_to_currency(@property.cleaning_fee) %></span></div>
+            <div>Security Deposit: <span class="bold">$125</span></div>
+            <div>Cancellation: <span class="bold">Moderate</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESCRIPTION -->
+
+      <div class="row property-info">
+        <div class="col-xs-3">Description</div>
+        <div class="col-xs-9 row">
+          <%= @property.description %>
+        </div>
+      </div>
+
+      <!-- EDIT PROPERTY BUTTON -->
+
+      <% if !@current_user.nil? && @current_user.id == @property.user_id %>
+      <div class="row">
+        <div class="button-container">
+          <%= link_to("Edit Property", edit_property_path, :class => "btn btn-warning") %>
+          <%= link_to("Remove Listing", property_path, :class => "btn btn-danger", :method => "delete") %>
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+
+
+    <!-- GAP FOR BOOKING FORM -->
+
+    <div class="col-md-4"></div>
+    
+
+  </div>  <!-- row -->
+</div>  <!-- column -->
+
+
+<!-- MAP FOR PROPERTY -->
+
+<div id="property-map" class="row">
+  <embed style="pointer-events:none;" width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= @property.latitude %>%2C%20%20<%= @property.longitude %>&key=AIzaSyAAiCRdJuc3KbZmfKzLhPkm4DAoG5-7lcA&zoom=15"></embed>
+</div>
+
+
+<!-- NEARBY PROPERTIES -->
+
+<div class="panel row">
+  <h4>Nearby Properties</h4>
+  <div class="row">
+    <% for property in @property.nearbys(10).limit(4) %>
+      <div class="col-sm-3">
+        <%== property_listing(property) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+
+<footer class="container-brand-dark row"></footer>
+
+
+

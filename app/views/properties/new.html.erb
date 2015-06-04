@@ -1,8 +1,32 @@
-<h1>Properties#new</h1>
-<p>Find me in app/views/properties/new.html.erb</p>
-
-<%= render :partial => "form" %>
 
 
+<div class="container">
+  
+  <div class="row">
 
+    <!-- PAGE BUFFER -->
 
+    <div class="col-xs-2"></div>
+    
+    <div class="col-xs-8">
+
+      <!-- MENU LINKS -->
+      <%== user_menu %>
+
+      <!-- PAGE CONTENTS -->
+
+      <div class="row col-md-12 ">
+        <h4>Add Listing:</h4>
+        <%= render :partial => "form" %>
+      </div>
+
+    </div>
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+
+  </div>
+      
+
+</div>  <!-- container -->

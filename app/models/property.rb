@@ -22,12 +22,14 @@
 #  active           :boolean
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  cleaning_fee     :float
 #
 
 class Property < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :property_type
+  has_many :bookings
 
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?

@@ -4,15 +4,18 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    session[:return_to] ||= request.referer if request.referer != request.original_url
   end
 
   def create
     @user = User.create(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to session.delete(:return_to)
     else
-      render :new
+      flash[:warning] = "Sign up failed, please try again"
+      #render :new    #flash message lasts 2 clicks 
+      redirect_to signup_path
     end
   end
 
@@ -22,12 +25,35 @@ class UsersController < ApplicationController
 
   def update
     user = @current_user
-    user.update user_params
-    redirect_to root_path
+    if user.update user_params
+      redirect_to session.delete(:return_to)
+    else
+      flash[:warning] = "Update failed, please try again"
+      redirect_to signup_path
+    end
+  end
+
+  def properties
+    @properties = Property.where(:user_id => @current_user.id).where(:active => true)
+  end
+
+  def rentals
+    @breakdown = {}
+    BookingStatus.all.each do |status|
+      @breakdown[status.name] = Booking.where(:booking_status_id => status.id).joins(:property).where("properties.user_id" => @current_user.id)
+    end
+  end
+
+  def bookings
+    @breakdown = {}
+    BookingStatus.all.each do |status|
+      @breakdown[status.name] = Booking.where(:user_id => @current_user.id).where(:booking_status_id => status.id)
+    end
   end
 
   def show
     @user = @current_user
+    @user = User.find params[:id] if params[:id].present?
   end
 
 

@@ -32,6 +32,8 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'will_paginate'
+gem "bootstrap-sass"
 
 gem 'remove_turbolinks'
     
@@ -56,3 +58,4 @@ group :development, :test do
   gem 'spring'
 end
 
+gem 'rails_12factor', group: :production

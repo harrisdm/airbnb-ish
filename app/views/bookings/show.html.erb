@@ -1,0 +1,155 @@
+
+
+
+
+
+<div class="container">
+  
+  <div class="row">
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+    
+    <!-- PAGE CONTENT -->
+
+    <div class="col-xs-8">
+
+      <!-- MENU LINKS -->
+      <%== user_menu %>
+
+        <!-- PAGE CONTENTS -->
+
+        <div class="row">
+          <div class="col-xs-12 panel">
+            <h4>Booking:</h4>
+
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="booking-image-container">
+                  <%= image_tag(property_image_link(@booking.property)) %>
+                </div>
+                <h4><%= link_to(@booking.property.title, @booking.property) %></h4>
+
+
+                <% case @booking.booking_status_id
+                    when 1
+                      colour = "bg-warning"
+                   when 2
+                      colour = "bg-success"
+                   else
+                      colour = "bg-danger"
+                   end %>
+                
+                <p class="<%= colour %> status_banner">
+                  <%= @booking.booking_status.name %>
+                </p>
+
+                <div class="row row-spacer text-center">
+                  <div class="col-md-7">
+                    <div class="col-md-6">
+                      <p class="sub-title">Check-in</p>
+                      <p><%= date_format(@booking.check_in) %></p>
+                      <p><%= time_format(@booking.check_in_time) %></p>
+                    </div>
+                    <div class="col-md-6">
+                      <p class="sub-title">Check-out</p>
+                      <p><%= date_format(@booking.check_out) %></p>
+                      <p><%= time_format(@booking.check_out_time) %></p>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="col-md-6">
+                      <p class="sub-title">Nights</p>
+                      <p><%= (@booking.check_out - @booking.check_in).to_i %></p>
+                    </div>
+                    <div class="col-md-6">
+                       <p class="sub-title">Guests</p>
+                      <p><%= @booking.guest_count %></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row row-spacer">
+                  <div class="col-xs-3"></div>
+                  <div class="col-xs-6 text-center">
+                    <h4>Host</h4>
+                    <div class="profile-image-container">
+                      <%= link_to(image_tag(profile_image_link(@booking.property.user)), show_user_path(@booking.property.user.id)) %>
+                    </div>
+                    <h5>
+                        <%= link_to(@booking.property.user.name, show_user_path(@booking.property.user.id)) %>
+                    </h5>
+                  </div>
+                  <div class="col-xs-3"></div>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="text-center"><h4>Billing</h4></div>
+                <% nights = (@booking.check_out - @booking.check_in).to_i %>
+                <% rent = @booking.rent || 0 %>
+                <% total_rent = rent * nights %>
+                <% cleaning_fee = @booking.cleaning_fee || 0 %>
+                <% service_fee = @booking.service_fee || 0 %>
+                <table class="table">
+                  <tr>
+                    <th><%= number_to_currency(rent) %> x <%= pluralize(nights, "night") %></th>
+                    <td><%= number_to_currency(total_rent) %></td>
+                  </tr>
+                  <tr>
+                    <th>Cleaning Fee</th>
+                    <td><%= number_to_currency(cleaning_fee) %></td>
+                  </tr>
+                  <tr>
+                    <th>Airbnb Fee</th>
+                    <td><%= number_to_currency(service_fee) %></td>
+                  </tr>
+                  <tr>
+                    <th>Total</th>
+                    <td><span class="bold"><%= number_to_currency(rent + cleaning_fee + service_fee) %></span></td>
+                  </tr>
+                </table>
+
+                <div class="row row-spacer">
+                  <div class="col-xs-3"></div>
+                  <div class="col-xs-6 text-center">
+                    <h4>Renting</h4>
+                    <div class="profile-image-container">
+                      <%= link_to(image_tag(profile_image_link(@booking.user)), show_user_path(@booking.user.id)) %>
+                    </div>
+                    <h5>
+                        <%= link_to(@booking.user.name, show_user_path(@booking.user.id)) %>
+                    </h5>
+                  </div>
+                  <div class="col-xs-3"></div>
+                </div>
+              </div>
+
+
+            </div>
+
+              
+
+            </div>
+
+          </div>
+        </div>
+          
+    </div>
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+
+  </div>
+      
+
+</div>  <!-- container -->
+
+
+
+
+
+
+

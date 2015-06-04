@@ -8,24 +8,55 @@
 </head>
 <body>
 
-<nav>
-  <ul>
-    <li><a href="<%= root_path %>">Home</a></li>
-    <% unless @current_user.present? %>
-    <li><a href="<%= signup_path %>">Sign Up</a></li>
-    <li><a href="<%= login_path %>">Log In</a></li>
-    <% else %>
-    <li><a href="<%= user_path %>">View Profile</a></li>
-    <li><a href="<%= logout_path %>">Log Out</a></li>
+<nav class="navbar navbar-default panel">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                    
+      </button>
+      <a class="navbar-brand" href="<%= root_path %>">
+        <img alt="Airbnb" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTuKQnxgvUge5DCCcXJPmGeIhU0vLDUCu0yEfW2eQQMQ02jsOPs2g">
+      </a>
+    </div>
+
+    <!-- NAV BAR SEARCH -->
+
+    <%= form_tag properties_path, :method => :get, :class => "navbar-form navbar-left " do %>
+    <div class="form-group"><%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Location" %></div>
+    <%= submit_tag "Search", :name => nil, :class => "btn btn-primary" %>
     <% end %>
-  </ul>
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <% unless @current_user.present? %>
+          <li><a href="<%= signup_path %>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="<%= login_path %>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <% else %>
+          <li><a href="<%= user_path %>"><span class="glyphicon glyphicon-user"></span> <%= @current_user.name %></a></li>
+          <li><a href="<%= logout_path %>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </nav>
 
-<% if flash[:notice].present? %>
-  <h2><%= flash[:notice] %></h2>
-<% end %>
+  <div class="container-fluid">
 
-<%= yield %>
+  <div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-xs-12 col-sm-8">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %> text-center"><%= value %></div>
+      <% end %>
+    </div>
+    <div class="col-sm-2"></div>
+  </div>
+
+    <%= yield %>
+  </div>
+
 
 </body>
 </html>

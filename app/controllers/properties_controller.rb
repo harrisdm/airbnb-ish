@@ -1,19 +1,23 @@
 class PropertiesController < ApplicationController
+
+  before_action :clear_session_url
+
   def index
     if params[:search].present?
-      @properties = Property.near(params[:search], 50, :order => :rent)
+      @properties = Property.where(:active => true).near(params[:search], 50, :order => :rent)
     else
-      @properties = Property.all
+      @properties = Property.where(:active => true)
     end
-    # @hash = Gmaps4rails.build_markers(@properties) do |property, marker|
-    #   marker.lat property.latitude
-    #   marker.lng property.longitude
-    #   marker.infowindow "$#{property.rent}"
 
-    #   marker.json({ title: "$#{property.rent.round()}", html: link_to(property.title, property) })
-    # end
-    #raise params.inspect
-    # MOVED TO THE VIEW FOR HELPER ACTION
+    @properties = @properties.paginate(:per_page => 6, :page => params[:page])
+    @hash = Gmaps4rails.build_markers(@properties) do |property, marker|
+      marker.lat property.latitude
+      marker.lng property.longitude
+      marker.infowindow "$#{property.rent}"
+
+      html = view_context.property_listing(property)
+      marker.json({ title: "$#{property.rent.round}", html: html })
+    end
   end
 
   def new
@@ -35,7 +39,6 @@ class PropertiesController < ApplicationController
 
   def update
     property = Property.find params[:id]
-    #raise params.inspect
     property.update property_params
     redirect_to property_path(params[:id])
   end
@@ -44,9 +47,13 @@ class PropertiesController < ApplicationController
     @property = Property.find params[:id]
   end
 
+  # THIS NEEDS SECURITY!!
   def destroy
+    property = Property.find params[:id]
+    property.update_attribute(:active, false)
+    redirect_to user_properties_path
   end
-
+ 
 
   private
   def property_params
@@ -54,3 +61,6 @@ class PropertiesController < ApplicationController
   end
 
 end
+
+
+

@@ -1,17 +1,59 @@
 
-<h1>Hi, <%= @user.first_name %>!</h1>
 
 
-<%= image_tag(@user.image) %>
-<p>First Name: <%= @user.first_name %></p>
-<p>Last Name: <%= @user.last_name %></p>
-<p>Email: <%= @user.email %></p>
+<div class="container">
+  
+  <div class="row">
 
-<p><%= link_to("Edit Profile", users_edit_path) %></p>
-<p><%= link_to("Add Property", new_property_path) %></p>
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+    
+    <div class="col-xs-8">
+
+      <!-- MENU LINKS -->
+      <%== user_menu %>
+     
+
+      <!-- PROFILE DETAILS -->
+
+      <div class="row text-center">
+        <div class="col-sm-6">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-8 text-center">
+            <div class="profile-image-container">
+              <%= image_tag(profile_image_link(@user)) %>
+            </div>
+          </div>
+          <div class="col-xs-2"></div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row col-xs-12">
+            <h1><%= @user.name %></h1>
+          </div>
+          <div class="row col-xs-12">
+            <p>Email: <span class="bold"><%= @user.email %></span></p>
+            <p>Member Since: <span class="bold"><%= date_format(@user.created_at) %></span></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+
+  </div>
+  
+</div>  <!-- container -->
 
 
-<h2>My Properties:</h2>
-<% @user.properties.each do |property| %>
-  <p><%= link_to(property.title, property_path(property.id)) %></p>
-<% end %>
+
+
+
+
+
+

@@ -2,49 +2,58 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/trunk/richmarker/src/richmarker-compiled.js' type='text/javascript'></script>
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js' type='text/javascript'></script>
-<h1>Properties#index</h1>
-<p>Find me in app/views/properties/index.html.erb</p>
-
-
-
-<%= form_tag properties_path, :method => :get do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
 
 
 
 
-<% unless @properties.nil? %>
-<ul>
-<% @properties.each do |property| %>
+<div class="row'">
 
-  <li><%= link_to(property.title, property) %></li>
+  <div class="col-sm-12 col-md-6 sidebar">
 
-<% end %>
-</ul>
-<% end %>
 
-<div style='width: 800px;'>
-  <div id="map" style='width: 800px; height: 400px;'></div>
+  <!-- SEARCH BAR -->
+
+   <!--  <div class="search-bar">
+      <%= form_tag properties_path, :method => :get do %>
+        <div class="form-group">
+          <div class="col-xs-10">
+          <%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Location" %>
+          </div>
+          <div class="col-xs-2">
+          <%= submit_tag "Search", :name => nil, :class => "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div> -->
+
+
+    <!-- MINI LISTINGS -->
+    <% unless @properties.nil? %>
+
+      <% @properties.each do |property| %>
+        <div class="col-xs-12 col-sm-4 col-md-6">
+          <%== property_listing(property) %>
+        </div>
+      <% end %>
+
+      <div class="page-links"><%= will_paginate @properties %></div>
+
+    <% end %>
+
+  </div>
+
+
+  <!-- DISPLAY THE MAP -->
+
+  <div class="col-md-6">
+    <div class="map-container">
+      <div id="map"></div>
+    </div>
+  </div>
+
 </div>
 
-
-<%
-@hash = Gmaps4rails.build_markers(@properties) do |property, marker|
-  marker.lat property.latitude
-  marker.lng property.longitude
-  marker.infowindow "$#{property.rent}"
-
-  marker.json({ title: number_to_currency(property.rent), html: link_to(property.title, property) })
-end
-%>
-
 <script type="text/javascript">
-buildMap(<%=raw @hash.to_json %>);
-
-
+  buildMap(<%=raw @hash.to_json %>);
 </script>
 
