@@ -14,7 +14,7 @@
 
         <div class="col-md-3 user-profile ">
           <%= link_to(image_tag(profile_image_link(@property.user)), show_user_path(@property.user.id)) %>
-          <h4><%= link_to(@property.user.first_name, show_user_path(@property.user.id)) %></h4>
+          <h4><%= link_to(@property.user.name, show_user_path(@property.user.id)) %></h4>
         </div>
 
         <!-- PROPERTY TITLE AND ICONS -->

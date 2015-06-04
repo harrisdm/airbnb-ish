@@ -48,17 +48,17 @@
                       <table class="table">
                         <tr>
                           <th>Property</th>
-                          <th>Host</th>
-                          <th>Check In</th>
-                          <th>Check Out</th>
+                          <th class="text-center">Renter</th>
+                          <th class="text-center">Check In</th>
+                          <th class="text-center">Check Out</th>
                           <th class="text-center">Options</th>
                         </tr>
                       <% bookings.each do |booking| %>
                         <tr>
                           <td><%= link_to(booking.property.title, booking.property )%></td>
-                          <td><%= booking.property.user.first_name %> <%= booking.property.user.last_name %></td>
-                          <td><%= date_format booking.check_in %></td>
-                          <td><%= date_format booking.check_out %></td>
+                          <td class="text-center"><%= link_to(booking.user.name, show_user_path(booking.user.id)) %></td>
+                          <td class="text-center"><%= date_format booking.check_in %></td>
+                          <td class="text-center"><%= date_format booking.check_out %></td>
                           <td class="text-center">
                             <div><%= link_to("View", booking) %></div>
                             <% if booking.booking_status_id == 1 %>
