@@ -78,7 +78,7 @@
                       <%= link_to(image_tag(profile_image_link(@booking.property.user)), show_user_path(@booking.property.user.id)) %>
                     </div>
                     <h5>
-                        <%= link_to("#{@booking.property.user.first_name} #{@booking.property.user.last_name}", show_user_path(@booking.property.user.id)) %>
+                        <%= link_to(@booking.property.user.name, show_user_path(@booking.property.user.id)) %>
                     </h5>
                   </div>
                   <div class="col-xs-3"></div>
@@ -116,7 +116,7 @@
                       <%= link_to(image_tag(profile_image_link(@booking.user)), show_user_path(@booking.user.id)) %>
                     </div>
                     <h5>
-                        <%= link_to("#{@booking.user.first_name} #{@booking.user.last_name}", show_user_path(@booking.user.id)) %>
+                        <%= link_to(@booking.user.name, show_user_path(@booking.user.id)) %>
                     </h5>
                   </div>
                   <div class="col-xs-3"></div>
