@@ -1,0 +1,69 @@
+
+
+
+<div class="container">
+  
+  <div class="row">
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+    
+    <div class="col-xs-8">
+
+      <!-- MENU LINKS -->
+      <%== user_menu %>
+
+        <!-- PAGE CONTENTS -->
+
+        <div class="row">
+          <div class="col-xs-12"><h4>Your Trips:</h4></div>
+        </div>
+        
+          <% if @breakdown.all? {|k,v| v.empty?} %>
+            <div class="row col-xs-12 panel text-center">
+              You have no trips planned
+            </div>
+          <% else %>
+            <% @breakdown.each do |status, bookings| %>
+              <% unless bookings.empty? %>
+                <div class="row" >
+                  <div class="col-xs-12 panel panel-spacer">
+                    <h4><%= status %></h4>
+                    <table class="table">
+                      <tr>
+                        <th>Property</th>
+                        <th>Host</th>
+                        <th>Check In</th>
+                        <th>Check Out</th>
+                        <th>Options</th>
+                      </tr>
+                    <% bookings.each do |booking| %>
+                      <tr>
+                        <td><%= link_to(booking.property.title, booking.property )%></td>
+                        <td><%= booking.property.user.first_name %> <%= booking.property.user.last_name %></td>
+                        <td><%= date_format booking.check_in %></td>
+                        <td><%= date_format booking.check_out %></td>
+                        <td><%= link_to("View Booking", booking) %></td>
+                      </tr>
+                    <% end %>
+                    </table>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        
+
+      </div>
+
+    </div>
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+
+  </div>
+      
+
+</div>  <!-- container -->

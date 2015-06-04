@@ -1,22 +1,40 @@
-<h1>Bookings#index</h1>
-<p>Find me in app/views/bookings/index.html.erb</p>
 
 
-<% @booking_breakdown.each do |status, bookings| %>
+<div class="container">
+  
+  <div class="row">
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+    
+    <div class="col-xs-8">
+
+      <!-- MENU LINKS -->
+      <%== user_menu %>
+
+        <!-- PAGE CONTENTS -->
+
+        <div class="row col-md-12 ">
+          <h4>Bookings:</h4>
+
+<% @bookings_breakdown.each do |status, bookings| %>
   <% unless bookings.empty? %>
-  <h2><%= status %></h2>
+  <h4><%= status %></h4>
   <table class="table">
     <tr>
       <th>Property</th>
+      <th>Host</th>
       <th>Check In</th>
       <th>Check Out</th>
-      <th></th>
+      <th>Options</th>
     </tr>
   <% bookings.each do |booking| %>
     <tr>
       <td><%= link_to(booking.property.title, booking.property )%></td>
-      <td><%= booking.check_in %></td>
-      <td><%= booking.check_out %></td>
+      <td><%= booking.property.user.first_name %> <%= booking.property.user.last_name %></td>
+      <td><%= date_format booking.check_in %></td>
+      <td><%= date_format booking.check_out %></td>
       <td><%= link_to("View Booking", booking) %></td>
     </tr>
   <% end %>
@@ -25,3 +43,17 @@
 <% end %>
 
 
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+
+  </div>
+      
+
+</div>  <!-- container -->

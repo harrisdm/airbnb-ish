@@ -1,11 +1,9 @@
 class BookingsController < ApplicationController
   def index
-    status_list = BookingStatus.all
-    @booking_breakdown = {}
-    status_list.each do |status|
-      @booking_breakdown[status.name] = Booking.where(:booking_status_id => status.id)
+    @bookings_breakdown = {}
+    BookingStatus.all.each do |status|
+      @bookings_breakdown[status.name] = Booking.where(:booking_status_id => status.id)
     end
-    @bookings = Booking.all
   end
 
   def new

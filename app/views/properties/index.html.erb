@@ -60,8 +60,7 @@
   marker.lng property.longitude
   marker.infowindow "$#{property.rent}"
 
-  @property = property
-  html = render :partial => "miniListing"
+  html = property_listing(property)
   marker.json({ title: "$#{property.rent.round}", html: html })
 end
 %>

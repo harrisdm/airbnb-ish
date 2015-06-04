@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get 'users/edit' => 'users#edit'
   patch '/users' => 'users#update'
   get '/user' => 'users#show'
+  get 'user/properties' => 'users#properties'
+  get 'user/rentals' => 'users#rentals'
+  get 'user/bookings' => 'users#bookings'
  
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
@@ -28,5 +31,9 @@ Rails.application.routes.draw do
   resources :properties
     
   resources :bookings
+
+  get '/bookings/accept/:id' => 'bookings#accept'
+  get '/bookings/decline/:id' => 'bookings#decline'
+  get '/bookings/cancel/:id' => 'bookings#cancel'
 
 end

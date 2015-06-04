@@ -1,14 +1,43 @@
 
-<h1>Edit Profile!</h1>
 
-<%= form_for @user, url: users_path do |f| %>
+<div class="container">
+  
+  <div class="row">
 
-  <p><%= f.label :first_name %><%= f.text_field :first_name %></p>
-  <p><%= f.label :last_name %><%= f.text_field :last_name %></p>
-  <p><%= f.label :email %><%= f.text_field :email %></p>
-  <p><%= f.label :image %><%= f.text_field :image %></p>
-  <p><%= f.label :password %><%= f.password_field :password %></p>
-  <p><%= f.label :password_confirmation %><%= f.password_field :password_confirmation %></p>
-  <p><%= f.submit "Submit" %></p>
+    <!-- PAGE BUFFER -->
 
-<% end %>
+    <div class="col-xs-2"></div>
+    
+    <div class="col-xs-8">
+
+      <!-- MENU LINKS -->
+      <%== user_menu %>
+
+      <!-- PAGE CONTENTS -->
+
+      <div class="row col-md-12 ">
+        <h4>Edit Profile:</h4>
+        <%= render :partial => "form" %>
+      </div>
+
+    </div>
+
+    <!-- PAGE BUFFER -->
+
+    <div class="col-xs-2"></div>
+
+  </div>
+      
+
+</div>  <!-- container -->
+
+
+
+
+
+
+
+
+
+
+

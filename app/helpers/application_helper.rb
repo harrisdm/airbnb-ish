@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def date_format(datetime)
-    datetime.strftime('%a %e %B %Y') unless datetime.blank?
+    datetime.strftime('%e %B %Y') unless datetime.blank?
   end
 
   def profile_image_link(source)
@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def property_listing(property)
-    listing = "<a href='" + property_path(property.id) + "'>"
+    listing =  "<a href='" + property_path(property.id) + "'>"
     listing += "  <div class='listing-container'>"
     listing += "    <div class='listing-pic-container'>"
     listing += "      <div class='listing-pic'>"
@@ -46,5 +46,22 @@ module ApplicationHelper
     listing += "</a>"
   end
 
+  def user_menu
+    menu =  "<div class='row col-md-12'>"
+    menu += "  <ul class='nav nav-tabs user-menu'>"
+    menu += "    <li>" + link_to('View Profile', user_path) + "</li>"
+    menu += "    <li>" + link_to('Edit Profile', users_edit_path) + "</li>"
+    menu += "    <li>" + link_to('Your Trips', user_bookings_path) + "</li>"
+    menu += "    <li>" + link_to('Your Rentals', user_rentals_path) + "</li>"
+    menu += "    <li>" + link_to('Properties', user_properties_path) + "</li>"
+    menu += "  </ul>"
+    menu += "</div>"
+  end
 
 end
+
+
+
+
+
+

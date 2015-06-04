@@ -26,6 +26,23 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
+  def properties
+  end
+
+  def rentals
+    @breakdown = {}
+    BookingStatus.all.each do |status|
+      @breakdown[status.name] = Booking.where(:booking_status_id => status.id).joins(:property).where("properties.user_id" => @current_user.id)
+    end
+  end
+
+  def bookings
+    @breakdown = {}
+    BookingStatus.all.each do |status|
+      @breakdown[status.name] = Booking.where(:user_id => @current_user.id).where(:booking_status_id => status.id)
+    end
+  end
+
   def show
   end
 

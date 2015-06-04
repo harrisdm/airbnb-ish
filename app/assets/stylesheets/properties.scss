@@ -8,6 +8,7 @@ body {
   line-height: 1.43;
   color: #565a5c; 
   background-color: #f5f5f5;
+  padding-bottom: 20px;
 }
 
 .navbar { 
@@ -15,11 +16,24 @@ body {
   margin-bottom: 0;
 }
 
+.navbar-brand img {
+  height: 40px;
+  margin-top: -15px;
+}
+
+.user-menu {
+  margin-bottom: 15px;
+}
+
 .container-brand-dark {
   padding: 50px 0;
   background-image: url(https://a1.muscache.com/airbnb/static/footer/background-7c73b7858fe7c4bc03505fc1f7f672fd.png);
   background-color: #2b2d2e;
   color: #fff;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 /***********************************************
@@ -158,6 +172,10 @@ body {
   padding: 15px;
 }
 
+.panel-spacer, .row-spacer {
+  margin-top: 15px;
+}
+
 .summary span { 
   display: block;
   font-size: 3em;
@@ -178,10 +196,6 @@ body {
   border-bottom: 1px solid rgba(200,200,200,1);
 }
 
-.property-info .bold {
-  font-weight: bold;
-}
-
 #property-map { margin-top: 15px; }
 
 .booking-form-container {
@@ -192,9 +206,24 @@ body {
 }
 
 .booking-form-container input { width: 100%; }
-
-
-
+.booking-image-container img { width: 100%; }
+.profile-image-container img { 
+  width: 100%;
+  border-radius: 50%;
+}
+.status_banner { 
+  padding: 5px; 
+  border: 1px solid rgba(200,200,200,1);
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.sub-title { 
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333333; 
+}
 
 
 
