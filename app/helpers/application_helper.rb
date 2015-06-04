@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def property_listing(property)
-    listing =  "<a href='" + property_path(property.id) + "'>"
+    listing =  "<a href='" + property_path(property.id) + "' target='_blank'>"
     listing += "  <div class='listing-container'>"
     listing += "    <div class='listing-pic-container'>"
     listing += "      <div class='listing-pic'>"

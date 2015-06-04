@@ -20,6 +20,14 @@
         <img alt="Airbnb" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTuKQnxgvUge5DCCcXJPmGeIhU0vLDUCu0yEfW2eQQMQ02jsOPs2g">
       </a>
     </div>
+
+    <!-- NAV BAR SEARCH -->
+
+    <%= form_tag properties_path, :method => :get, :class => "navbar-form navbar-left " do %>
+    <div class="form-group"><%= text_field_tag :search, params[:search], :class => "form-control", :placeholder => "Location" %></div>
+    <%= submit_tag "Search", :name => nil, :class => "btn btn-primary" %>
+    <% end %>
+
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <% unless @current_user.present? %>
