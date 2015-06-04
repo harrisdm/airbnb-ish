@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get   'user/properties' => 'users#properties'
   get   'user/rentals'    => 'users#rentals'
   get   'user/bookings'   => 'users#bookings'
+  get   '/user/:id'       => 'users#show',      :as => 'show_user'
 
 
   resources :properties

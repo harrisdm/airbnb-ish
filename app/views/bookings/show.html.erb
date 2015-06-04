@@ -75,10 +75,10 @@
                   <div class="col-xs-6 text-center">
                     <h4>Host</h4>
                     <div class="profile-image-container">
-                      <%= link_to(image_tag(profile_image_link(@booking.property.user)), @booking.property.user) %>
+                      <%= link_to(image_tag(profile_image_link(@booking.property.user)), show_user_path(@booking.property.user.id)) %>
                     </div>
                     <h5>
-                        <%= link_to("#{@booking.property.user.first_name} #{@booking.property.user.last_name}", @booking.property.user) %>
+                        <%= link_to("#{@booking.property.user.first_name} #{@booking.property.user.last_name}", show_user_path(@booking.property.user.id)) %>
                     </h5>
                   </div>
                   <div class="col-xs-3"></div>
@@ -107,7 +107,23 @@
                     <td><span class="bold"><%= number_to_currency(rent+34+50) %></span></td>
                   </tr>
                 </table>
+
+                <div class="row row-spacer">
+                  <div class="col-xs-3"></div>
+                  <div class="col-xs-6 text-center">
+                    <h4>Renting</h4>
+                    <div class="profile-image-container">
+                      <%= link_to(image_tag(profile_image_link(@booking.user)), show_user_path(@booking.user.id)) %>
+                    </div>
+                    <h5>
+                        <%= link_to("#{@booking.user.first_name} #{@booking.user.last_name}", show_user_path(@booking.user.id)) %>
+                    </h5>
+                  </div>
+                  <div class="col-xs-3"></div>
+                </div>
               </div>
+
+
             </div>
 
               

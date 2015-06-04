@@ -13,8 +13,8 @@
         <!-- OWNER PROFILE -->
 
         <div class="col-md-3 user-profile ">
-          <%= image_tag(profile_image_link(@property.user)) %>
-          <h4><%= @property.user.first_name %></h4>
+          <%= link_to(image_tag(profile_image_link(@property.user)), show_user_path(@property.user.id)) %>
+          <h4><%= link_to(@property.user.first_name, show_user_path(@property.user.id)) %></h4>
         </div>
 
         <!-- PROPERTY TITLE AND ICONS -->
