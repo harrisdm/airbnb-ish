@@ -33,8 +33,28 @@ class BookingsController < ApplicationController
     @booking = Booking.find params[:id]
   end
 
+  # THESE NEED SECURITY!!
+  def accept
+    booking = Booking.find params[:id]
+    booking.update_attribute(:booking_status_id, 2)
+    redirect_to user_rentals_path
+  end
+
+  def decline
+    booking = Booking.find params[:id]
+    booking.update_attribute(:booking_status_id, 3)
+    redirect_to user_rentals_path
+  end
+
+  def cancel
+    booking = Booking.find params[:id]
+    booking.update_attribute(:booking_status_id, 4)
+    redirect_to user_rentals_path
+  end
+
   private
   def booking_params
     params.permit(:check_in, :check_out, :property_id, :user_id, :booking_status_id)
   end
+
 end

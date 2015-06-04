@@ -28,26 +28,47 @@
             <% @breakdown.each do |status, bookings| %>
               <% unless bookings.empty? %>
                 <div class="row" >
+
+                <% 
+                  case bookings.first.booking_status_id
+                    when 1
+                      colour = "bg-warning"
+                   when 2
+                      colour = "bg-success"
+                   else
+                      colour = "bg-danger"
+                   end 
+                %>
+
                   <div class="col-xs-12 panel panel-spacer">
-                    <h4><%= status %></h4>
-                    <table class="table">
-                      <tr>
-                        <th>Property</th>
-                        <th>Host</th>
-                        <th>Check In</th>
-                        <th>Check Out</th>
-                        <th>Options</th>
-                      </tr>
-                    <% bookings.each do |booking| %>
-                      <tr>
-                        <td><%= link_to(booking.property.title, booking.property )%></td>
-                        <td><%= booking.property.user.first_name %> <%= booking.property.user.last_name %></td>
-                        <td><%= date_format booking.check_in %></td>
-                        <td><%= date_format booking.check_out %></td>
-                        <td><%= link_to("View Booking", booking) %></td>
-                      </tr>
-                    <% end %>
-                    </table>
+                    <div class="<%= colour %> status_banner">
+                      <h4><%= status %></h4>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <tr>
+                          <th>Property</th>
+                          <th>Host</th>
+                          <th>Check In</th>
+                          <th>Check Out</th>
+                          <th class="text-center">Options</th>
+                        </tr>
+                      <% bookings.each do |booking| %>
+                        <tr>
+                          <td><%= link_to(booking.property.title, booking.property )%></td>
+                          <td><%= booking.property.user.first_name %> <%= booking.property.user.last_name %></td>
+                          <td><%= date_format booking.check_in %></td>
+                          <td><%= date_format booking.check_out %></td>
+                          <td class="text-center">
+                            <div><%= link_to("View", booking) %></div>
+                            <% if booking.booking_status_id == 1 || booking.booking_status_id == 2 %>
+                              <div><%= link_to("Cancel", cancel_booking_path(booking.id), :method => :patch) %></div>
+                            <% end %>
+                          </td>
+                        </tr>
+                      <% end %>
+                      </table>
+                    </div>
                   </div>
                 </div>
               <% end %>
