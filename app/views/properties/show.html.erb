@@ -78,16 +78,27 @@
               </div>
             </div>
           </div>
+          <%# raise params.inspect %>
+          <div class="form-group"><%= hidden_field_tag :property_id, @property.id, :class => "form-control"  %></div>
 
-          <div class="form-group"><%= hidden_field_tag :property_id, @property.id, :class => "form-control"  %></div> 
-          <div class="form-group"><%= hidden_field_tag :user_id, @current_user.id, :class => "form-control" %></div>
+          <% if @current_user.nil? %>
+            <div class="form-group"><%= hidden_field_tag :user_id, 0, :class => "form-control" %></div>
+          <% else %>
+            <div class="form-group"><%= hidden_field_tag :user_id, @current_user.id, :class => "form-control" %></div>
+          <% end %>
+
           <div class="form-group"><%= hidden_field_tag :booking_status_id, 1, :class => "form-control" %></div>
           <div class="form-group"><%= hidden_field_tag :rent, @property.rent, :class => "form-control" %></div>
           <div class="form-group"><%= hidden_field_tag :cleaning_fee, @property.cleaning_fee, :class => "form-control" %></div>
           <div class="form-group"><%= hidden_field_tag :service_fee, 50, :class => "form-control" %></div>
           <div class="form-group"><%= hidden_field_tag :check_in_time, @property.check_in_time, :class => "form-control" %></div>
           <div class="form-group"><%= hidden_field_tag :check_out_time, @property.check_out_time, :class => "form-control" %></div>
-          <div><%= submit_tag "Request Booking", :class => "form-control btn-success" %></div>
+          <% if @current_user.nil? %>
+            <div class="booking-button-container"><%= link_to("Login", login_path, :class => "form-control btn-success") %></div>
+            <div class="booking-button-container"><%= link_to("Sign Up", signup_path, :class => "form-control btn-success") %></div>
+          <% else %>
+            <div class="booking-button-container"><%= submit_tag "Request Booking", :class => "form-control btn-success" %></div>
+          <% end %>
           <% end %>
         </div>
       </div>
@@ -149,7 +160,7 @@
             <div>Monthly: <span class="bold"><%= number_to_currency(@property.rent * 30 * 0.8) %> /month</span></div>
           </div>
           <div class="col-sm-6">
-            <div>Cleaning Fee: <span class="bold">$34</span></div>
+            <div>Cleaning Fee: <span class="bold"><%= number_to_currency(@property.cleaning_fee) %></span></div>
             <div>Security Deposit: <span class="bold">$125</span></div>
             <div>Cancellation: <span class="bold">Moderate</span></div>
           </div>
@@ -167,7 +178,7 @@
 
       <!-- EDIT PROPERTY BUTTON -->
 
-      <% if @current_user.id == @property.user_id %>
+      <% if !@current_user.nil? && @current_user.id == @property.user_id %>
       <div class="row">
         <div class="button-container">
           <%= link_to("Edit Property", edit_property_path, :class => "btn btn-warning") %>

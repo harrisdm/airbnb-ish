@@ -38,8 +38,11 @@ a, a:hover { text-decoration: none; }
   font-weight: bold;
 }
 
-.button-container {
+.button-container, .booking-button-container {
   padding: 10px;
+}
+
+.button-container {
   text-align: right;
 }
 

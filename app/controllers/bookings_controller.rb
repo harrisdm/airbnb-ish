@@ -14,7 +14,6 @@ class BookingsController < ApplicationController
   end
 
   def create
-    raise params.inspect
     booking = Booking.create(booking_params)
     if booking.save
       redirect_to booking_path(booking.id)
