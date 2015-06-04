@@ -50,12 +50,12 @@
                     <div class="col-md-6">
                       <p class="sub-title">Check-in</p>
                       <p><%= date_format(@booking.check_in) %></p>
-                      <p><%= time_format(@booking.property.check_in_time) %></p>
+                      <p><%= time_format(@booking.check_in_time) %></p>
                     </div>
                     <div class="col-md-6">
                       <p class="sub-title">Check-out</p>
                       <p><%= date_format(@booking.check_out) %></p>
-                      <p><%= time_format(@booking.property.check_out_time) %></p>
+                      <p><%= time_format(@booking.check_out_time) %></p>
                     </div>
                   </div>
                   <div class="col-md-5">
@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-6">
                        <p class="sub-title">Guests</p>
-                      <p><%=  %></p>
+                      <p><%= @booking.guest_count %></p>
                     </div>
                   </div>
                 </div>
@@ -88,23 +88,26 @@
               <div class="col-sm-4">
                 <div class="text-center"><h4>Billing</h4></div>
                 <% nights = (@booking.check_out - @booking.check_in).to_i %>
-                <% rent = @booking.property.rent * nights %>
+                <% rent = @booking.rent || 0 %>
+                <% total_rent = rent * nights %>
+                <% cleaning_fee = @booking.cleaning_fee || 0 %>
+                <% service_fee = @booking.service_fee || 0 %>
                 <table class="table">
                   <tr>
-                    <th><%= number_to_currency(@booking.property.rent) %> x <%= pluralize(nights, "night") %></th>
-                    <td><%= number_to_currency(rent) %></td>
+                    <th><%= number_to_currency(rent) %> x <%= pluralize(nights, "night") %></th>
+                    <td><%= number_to_currency(total_rent) %></td>
                   </tr>
                   <tr>
                     <th>Cleaning Fee</th>
-                    <td><%= number_to_currency(34) %></td>
+                    <td><%= number_to_currency(cleaning_fee) %></td>
                   </tr>
                   <tr>
                     <th>Airbnb Fee</th>
-                    <td><%= number_to_currency(50) %></td>
+                    <td><%= number_to_currency(service_fee) %></td>
                   </tr>
                   <tr>
                     <th>Total</th>
-                    <td><span class="bold"><%= number_to_currency(rent+34+50) %></span></td>
+                    <td><span class="bold"><%= number_to_currency(rent + cleaning_fee + service_fee) %></span></td>
                   </tr>
                 </table>
 

@@ -22,6 +22,7 @@
 #  active           :boolean
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  cleaning_fee     :float
 #
 
 class Property < ActiveRecord::Base

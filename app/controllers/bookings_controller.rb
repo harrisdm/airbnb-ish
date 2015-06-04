@@ -45,7 +45,9 @@ class BookingsController < ApplicationController
 
   private
   def booking_params
-    params.permit(:check_in, :check_out, :property_id, :user_id, :booking_status_id)
+    params.permit(:check_in, :check_out, :property_id, :user_id, :booking_status_id, :rent, :cleaning_fee, :service_fee, :guest_count, :check_in_time, :check_out_time)
   end
 
 end
+
+

@@ -63,11 +63,30 @@
                 <%= date_field_tag :check_out, :class => "form-control" %>
               </div>
             </div>
+            <div class="col-xs-12">
+              <div class="form-group">
+                <% 
+                  count = 1
+                  guests = []
+                  until count > @property.max_people do
+                    guests.push([count,count])
+                    count += 1
+                  end
+                %>
+                <%= label_tag :guest_count, "Number of Guests" %>
+                <%= select_tag :guest_count, options_for_select(guests), :class => 'form-control' %>
+              </div>
+            </div>
           </div>
 
           <div class="form-group"><%= hidden_field_tag :property_id, @property.id, :class => "form-control"  %></div> 
           <div class="form-group"><%= hidden_field_tag :user_id, @current_user.id, :class => "form-control" %></div>
           <div class="form-group"><%= hidden_field_tag :booking_status_id, 1, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :rent, @property.rent, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :cleaning_fee, @property.cleaning_fee, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :service_fee, 50, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :check_in_time, @property.check_in_time, :class => "form-control" %></div>
+          <div class="form-group"><%= hidden_field_tag :check_out_time, @property.check_out_time, :class => "form-control" %></div>
           <div><%= submit_tag "Request Booking", :class => "form-control btn-success" %></div>
           <% end %>
         </div>

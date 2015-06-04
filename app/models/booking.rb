@@ -10,6 +10,12 @@
 #  booking_status_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime
+#  rent              :float
+#  cleaning_fee      :float
+#  service_fee       :float
+#  check_in_time     :time
+#  check_out_time    :time
+#  guest_count       :integer
 #
 
 class Booking < ActiveRecord::Base
