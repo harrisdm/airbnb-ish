@@ -4,15 +4,18 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
+    session[:return_to] ||= request.referer if request.referer != request.original_url
   end
 
   def create
     @user = User.create(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path
+      redirect_to session.delete(:return_to)
     else
-      render :new
+      flash[:warning] = "Sign up failed, please try again"
+      #render :new    #flash message lasts 2 clicks 
+      redirect_to signup_path
     end
   end
 
@@ -22,8 +25,12 @@ class UsersController < ApplicationController
 
   def update
     user = @current_user
-    user.update user_params
-    redirect_to root_path
+    if user.update user_params
+      redirect_to session.delete(:return_to)
+    else
+      flash[:warning] = "Update failed, please try again"
+      redirect_to signup_path
+    end
   end
 
   def properties

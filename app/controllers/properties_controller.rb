@@ -1,4 +1,7 @@
 class PropertiesController < ApplicationController
+
+  before_action :clear_session_url
+
   def index
     if params[:search].present?
       @properties = Property.where(:active => true).near(params[:search], 50, :order => :rent)

@@ -1,4 +1,7 @@
 class BookingsController < ApplicationController
+  
+  before_action :clear_session_url
+
   def index
     @bookings_breakdown = {}
     BookingStatus.all.each do |status|
@@ -11,11 +14,12 @@ class BookingsController < ApplicationController
   end
 
   def create
-    #raise params.inspect
+    raise params.inspect
     booking = Booking.create(booking_params)
     if booking.save
       redirect_to booking_path(booking.id)
     else
+      flash[:warning] = "Booking could not be made, please try again"
       render :new
     end
   end
