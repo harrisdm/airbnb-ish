@@ -2,7 +2,7 @@ class CreateProperties < ActiveRecord::Migration
   def change
     create_table :properties do |t|
       t.string  :title
-      t.string  :image            :default => "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg"
+      t.string  :image            
       t.text    :address
       t.float   :latitude
       t.float   :longitude
@@ -17,7 +17,7 @@ class CreateProperties < ActiveRecord::Migration
       t.time    :check_out_time
       t.boolean :pets
       t.integer :user_id
-      t.boolean :active
+      t.boolean :active           :default => true 
 
       t.timestamps null: false
     end

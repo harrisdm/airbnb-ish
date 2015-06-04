@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def properties
+    @properties = Property.where(:user_id => @current_user.id).where(:active => true)
   end
 
   def rentals

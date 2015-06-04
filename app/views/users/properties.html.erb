@@ -20,12 +20,12 @@
           <div class="col-xs-8"><h4>Listings:</h4></div>
           <div class="col-xs-4 text-right"><%= link_to("Add Property", new_property_path, :class => "btn btn-success") %></div>
         </div>
-          <% if @current_user.properties.empty? %>
+          <% if @properties.empty? %>
             <div class="row col-xs-12 panel text-center">
             No properties listed
             </div>
           <% else %>
-            <% @current_user.properties.each do |property| %>
+            <% @properties.each do |property| %>
               <div class="col-sm-6 col-md-4">
                 <%== property_listing(property) %>
               </div>

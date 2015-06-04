@@ -198,6 +198,11 @@ a, a:hover { text-decoration: none; }
   border-bottom: 1px solid rgba(200,200,200,1);
 }
 
+.property-buttons {
+  padding: 10px;
+  text-align: right;
+}
+
 #property-map { margin-top: 15px; }
 
 .booking-form-container {
@@ -208,6 +213,11 @@ a, a:hover { text-decoration: none; }
 }
 
 .booking-form-container input { width: 100%; }
+
+
+/***********************************************
+  Booking page
+***********************************************/
 .booking-image-container img { width: 100%; }
 .profile-image-container img { 
   width: 100%;

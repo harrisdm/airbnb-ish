@@ -37,15 +37,15 @@ Rails.application.routes.draw do
   get   '/logout' => 'sessions#destroy'
 
 
-  get   '/signup'         => 'users#new'
-  post  '/users'          => 'users#create'
-  get   'users/edit'      => 'users#edit'
-  patch '/users'          => 'users#update'
-  get   '/user'           => 'users#show'
-  get   'user/properties' => 'users#properties'
-  get   'user/rentals'    => 'users#rentals'
-  get   'user/bookings'   => 'users#bookings'
-  get   '/user/:id'       => 'users#show',      :as => 'show_user'
+  get   '/signup'           => 'users#new'
+  post  '/users'            => 'users#create'
+  get   '/users/edit'       => 'users#edit'
+  patch '/users'            => 'users#update'
+  get   '/user/properties'  => 'users#properties'
+  get   '/user/rentals'     => 'users#rentals'
+  get   '/user/bookings'    => 'users#bookings'
+  get   '/user/:id'         => 'users#show',      :as => 'show_user'
+  get   '/user'             => 'users#show'
 
 
   resources :properties
