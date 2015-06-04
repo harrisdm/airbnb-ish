@@ -7,15 +7,14 @@ class PropertiesController < ApplicationController
     end
 
     @properties = @properties.paginate(:per_page => 6, :page => params[:page])
-    # @hash = Gmaps4rails.build_markers(@properties) do |property, marker|
-    #   marker.lat property.latitude
-    #   marker.lng property.longitude
-    #   marker.infowindow "$#{property.rent}"
+    @hash = Gmaps4rails.build_markers(@properties) do |property, marker|
+      marker.lat property.latitude
+      marker.lng property.longitude
+      marker.infowindow "$#{property.rent}"
 
-    #   marker.json({ title: "$#{property.rent.round()}", html: link_to(property.title, property) })
-    # end
-    #raise params.inspect
-    # MOVED TO THE VIEW FOR HELPER ACTION
+      html = view_context.property_listing(property)
+      marker.json({ title: "$#{property.rent.round}", html: html })
+    end
   end
 
   def new
