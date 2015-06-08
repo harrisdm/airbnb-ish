@@ -9,10 +9,11 @@
 #           users POST   /users(.:format)                users#create
 #      users_edit GET    /users/edit(.:format)           users#edit
 #                 PATCH  /users(.:format)                users#update
-#            user GET    /user(.:format)                 users#show
 # user_properties GET    /user/properties(.:format)      users#properties
 #    user_rentals GET    /user/rentals(.:format)         users#rentals
 #   user_bookings GET    /user/bookings(.:format)        users#bookings
+#       show_user GET    /user/:id(.:format)             users#show
+#            user GET    /user(.:format)                 users#show
 #      properties GET    /properties(.:format)           properties#index
 #                 POST   /properties(.:format)           properties#create
 #    new_property GET    /properties/new(.:format)       properties#new

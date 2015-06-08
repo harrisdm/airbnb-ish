@@ -1,3 +1,25 @@
 // Place all the styles related to the bookings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+ 
+/***********************************************
+  Booking page
+***********************************************/
+.booking-image-container img { width: 100%; }
+.profile-image-container img { 
+  width: 100%;
+  border-radius: 50%;
+}
+.status_banner { 
+  padding: 5px; 
+  border: 1px solid rgba(200,200,200,1);
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.sub-title { 
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333333; 
+} 

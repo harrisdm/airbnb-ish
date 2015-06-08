@@ -41,8 +41,8 @@ class Property < ActiveRecord::Base
   validates :rent, :presence => true
   validates :cleaning_fee, :presence => true
   validates :beds, :presence => true
-  validates :bathrooms, :presence => true
-  validates :guests, :presence => true
+  validates :baths, :presence => true
+  validates :max_people, :presence => true
   validates :min_stay, :presence => true
   validates :check_in_time, :presence => true
   validates :check_out_time, :presence => true

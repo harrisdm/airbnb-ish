@@ -3,12 +3,17 @@ class BookingsController < ApplicationController
   before_action :clear_session_url
 
   def create
-    booking = Booking.create(booking_params)
-    if booking.save
-      redirect_to booking_path(booking.id)
+    if slot_is_available()
+      booking = Booking.create(booking_params)
+      if booking.save
+        redirect_to booking_path(booking.id)
+      else
+        flash[:warning] = "Booking could not be made, please try again"
+        redirect_to property_path(params[:property_id])
+      end
     else
       flash[:warning] = "Booking could not be made, please try again"
-      render :new
+      redirect_to property_path(params[:property_id])
     end
   end
 
@@ -16,7 +21,7 @@ class BookingsController < ApplicationController
     @booking = Booking.find params[:id]
   end
 
-  # THESE NEED SECURITY!!
+
   # Mark a request as accepted
   def accept
     @booking = Booking.find params[:id]
@@ -66,6 +71,17 @@ class BookingsController < ApplicationController
     answer = false
     answer = true if @booking.property.user_id == @current_user.id
     return answer
+  end
+
+  def slot_is_available
+    bookings = Booking.where("property_id = ?", params[:property_id]).where("check_in >= ?", params[:check_in]).where("booking_status_id = 1 OR booking_status_id = 2")
+    
+    check = true
+    bookings.each do |booking|
+      check = false if ((booking.check_in <= Date.parse(params[:check_out])) && (booking.check_out >= Date.parse(params[:check_in])))
+    end
+
+    return check
   end
 
 end
