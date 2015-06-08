@@ -16,6 +16,7 @@ class PropertiesController < ApplicationController
     @hash = Gmaps4rails.build_markers(@properties) do |property, marker|
       marker.lat property.latitude
       marker.lng property.longitude
+      marker.infowindow "$#{property.rent}"
       html = view_context.property_listing(property)
       marker.json({ title: "$#{property.rent.round}", html: html })
     end
