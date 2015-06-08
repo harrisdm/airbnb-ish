@@ -9,28 +9,41 @@
 
 <div class="row">
   <div class="col-sm-6">
-    <div class="form-group"><%= f.label :address %><%= f.text_area :address, :class => "form-control" %></div>
-    <div class="form-group"><%= f.label :description %><%= f.text_area :description, :rows => 4, :class => "form-control" %></div>
+    <div class="form-group"><%= f.label :address %><%= f.text_area :address, :rows => 3, :class => "form-control" %></div>
+    <div class="form-group"><%= f.label :description %><%= f.text_area :description, :rows => 7, :class => "form-control" %></div>
     <div class="form-group">
       <%= f.label :property_type_id %>
       <%= f.select :property_type_id, PropertyType.all.map { |type| [type.name, type.id] }, {}, { :class => 'form-control' }  %>
-    </div>
-    <div class="form-group"><%= f.label :beds, 'Number of beds' %><%= f.number_field :beds, :class => "form-control" %></div> 
-    <div class="form-group"><%= f.label :baths, 'Number of bathrooms' %><%= f.number_field :baths, :class => "form-control" %></div> 
-  </div>
-
-  <div class="col-sm-6">
-    <div class="form-group"><%= f.label :rent, 'Nightly Rent' %><%= f.number_field :rent, :class => "form-control" %></div> 
-    <div class="form-group"><%= f.label :max_people, 'Maximum number of guests' %><%= f.number_field :max_people, :class => "form-control" %></div> 
-    <div class="form-group"><%= f.label :min_stay, 'Minimum Stay' %><%= f.number_field :min_stay, :class => "form-control" %></div> 
-
-    <div class="form-group"><%= f.label :check_in_time %><%= f.time_field :check_in_time, :value => "16:00:00", :class => "form-control" %></div> 
-    <div class="form-group"><%= f.label :check_out_time %><%= f.time_field :check_out_time, :value => "11:00:00", :class => "form-control" %></div> 
-
+    </div>    
     <div class="form-group">
       <%= f.label :pets, 'Pets Allowed' %>
       <%= f.select :pets, [["No", false],["Yes", true]], {}, { :class => 'form-control' } %>
     </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="form-group"><%= f.label :rent, 'Nightly Rent' %><%= f.number_field :rent, :class => "form-control" %></div> 
+    <div class="form-group"><%= f.label :cleaning_fee %><%= f.number_field :cleaning_fee, :value => 100, :class => "form-control" %></div>
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group"><%= f.label :beds, 'Beds' %><%= f.number_field :beds, :class => "form-control" %></div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group"><%= f.label :baths, 'Bathrooms' %><%= f.number_field :baths, :class => "form-control" %></div>
+      </div>
+    </div> 
+    <div class="form-group"><%= f.label :max_people, 'Maximum number of guests' %><%= f.number_field :max_people, :class => "form-control" %></div> 
+    <div class="form-group"><%= f.label :min_stay, 'Minimum Stay' %><%= f.number_field :min_stay, :class => "form-control" %></div> 
+
+    <div class="row">
+      <div class="col-xs-6">
+        <div class="form-group"><%= f.label :check_in_time, "Check In" %><%= f.time_field :check_in_time, :value => "16:00:00", :class => "form-control" %></div>
+      </div>
+      <div class="col-xs-6">
+        <div class="form-group"><%= f.label :check_out_time, "Check Out" %><%= f.time_field :check_out_time, :value => "11:00:00", :class => "form-control" %></div>
+      </div>
+    </div>
+
   </div>
 </div>
 <div class="form-group"><%= f.hidden_field :user_id, :value => @current_user.id, :class => "form-control" %></div> 
