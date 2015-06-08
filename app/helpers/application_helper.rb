@@ -9,6 +9,7 @@ module ApplicationHelper
     datetime.strftime('%e %B %Y') unless datetime.blank?
   end
 
+  # Supply a defualt profile image if one is not supplied
   def profile_image_link(source)
     if source.image.blank?
       return "http://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif" 
@@ -17,6 +18,7 @@ module ApplicationHelper
     end
   end
 
+  # Supply a defualt property image if one is not supplied
   def property_image_link(source)
     if source.image.blank?
       return "https://d1luk0418egahw.cloudfront.net/static/images/guide/NoImage_592x444.jpg"
@@ -25,6 +27,7 @@ module ApplicationHelper
     end
   end
 
+  # Code to create the mini-listings for profiles
   def property_listing(property)
     listing =  "<a href='" + property_path(property.id) + "' target='_blank'>"
     listing += "  <div class='listing-container'>"
@@ -40,12 +43,13 @@ module ApplicationHelper
     listing +=        image_tag(profile_image_link(property.user)) 
     listing += "    </div>"
     listing += "    <div class='listing-title'>"
-    listing +=        link_to(property.title, property)
+    listing +=        link_to(truncate(property.title, :length => 20), property)
     listing += "    </div>"
     listing += "  </div>"
     listing += "</a>"
   end
 
+  # Menu on the profile pages
   def user_menu
     menu =  "<div class='row col-md-12'>"
     menu += "  <ul class='nav nav-tabs user-menu'>"

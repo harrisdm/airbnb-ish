@@ -51,7 +51,6 @@ Rails.application.routes.draw do
   resources :properties
     
 
-  #resources :bookings
   post  '/bookings'             =>  'bookings#create'
   get   '/bookings/:id'         =>  'bookings#show',    :as => 'booking'
   patch '/bookings/accept/:id'  =>  'bookings#accept',  :as => 'accept_booking'

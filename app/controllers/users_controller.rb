@@ -33,10 +33,12 @@ class UsersController < ApplicationController
     end
   end
 
+  # Display the list of properties owned by the user
   def properties
     @properties = Property.active.where(:user_id => @current_user.id)
   end
 
+  # Display the list of upcoming requests for the user's properties
   def rentals
     @breakdown = {}
     BookingStatus.all.each do |status|
@@ -44,6 +46,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # Display the list of upcoming trips the user has made requests for
   def bookings
     @breakdown = {}
     BookingStatus.all.each do |status|

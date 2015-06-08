@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     @current_user = User.find session[:user_id] if session[:user_id]
   end
 
- 
   def clear_session_url
     session.delete(:return_to)
   end

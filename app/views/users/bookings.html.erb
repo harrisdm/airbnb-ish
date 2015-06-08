@@ -55,7 +55,7 @@
                         </tr>
                       <% bookings.each do |booking| %>
                         <tr>
-                          <td><%= link_to(booking.property.title, booking.property )%></td>
+                          <td><%= link_to(truncate(booking.property.title, :length => 20), booking.property )%></td>
                           <td class="text-center"><%= link_to(booking.property.user.name, show_user_path(booking.property.user.id)) %></td>
                           <td class="text-center"><%= date_format booking.check_in %></td>
                           <td class="text-center"><%= date_format booking.check_out %></td>
