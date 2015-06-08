@@ -24,4 +24,9 @@ class Booking < ActiveRecord::Base
   belongs_to :property
   belongs_to :booking_status  
 
+  scope :upComing, -> { where("check_in > ?", Date.today).order("check_in ASC") }
+
+  validates :check_in, :presence => true
+  validates :check_out, :presence => true
+
 end

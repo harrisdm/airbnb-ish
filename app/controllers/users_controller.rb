@@ -34,20 +34,20 @@ class UsersController < ApplicationController
   end
 
   def properties
-    @properties = Property.where(:user_id => @current_user.id).where(:active => true)
+    @properties = Property.active.where(:user_id => @current_user.id)
   end
 
   def rentals
     @breakdown = {}
     BookingStatus.all.each do |status|
-      @breakdown[status.name] = Booking.where(:booking_status_id => status.id).joins(:property).where("properties.user_id" => @current_user.id)
+      @breakdown[status.name] = Booking.upComing.where(:booking_status_id => status.id).joins(:property).where("properties.user_id" => @current_user.id)
     end
   end
 
   def bookings
     @breakdown = {}
     BookingStatus.all.each do |status|
-      @breakdown[status.name] = Booking.where(:user_id => @current_user.id).where(:booking_status_id => status.id)
+      @breakdown[status.name] = Booking.upComing.where(:user_id => @current_user.id).where(:booking_status_id => status.id)
     end
   end
 

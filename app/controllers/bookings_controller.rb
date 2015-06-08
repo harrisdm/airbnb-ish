@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
   def index
     @bookings_breakdown = {}
     BookingStatus.all.each do |status|
-      @bookings_breakdown[status.name] = Booking.where(:booking_status_id => status.id)
+      @bookings_breakdown[status.name] = Booking.upComing.where(:booking_status_id => status.id).order("check_in ASC")
     end
   end
 

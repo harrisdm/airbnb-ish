@@ -34,4 +34,17 @@ class Property < ActiveRecord::Base
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
 
+  scope :active, -> { where(:active => true).order("id ASC") }
+
+  validates :title, :presence => true
+  validates :address, :presence => true
+  validates :rent, :presence => true
+  validates :cleaning_fee, :presence => true
+  validates :beds, :presence => true
+  validates :bathrooms, :presence => true
+  validates :guests, :presence => true
+  validates :min_stay, :presence => true
+  validates :check_in_time, :presence => true
+  validates :check_out_time, :presence => true
+
 end
